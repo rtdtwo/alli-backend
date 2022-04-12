@@ -5,6 +5,11 @@ import waitress
 app = Flask(__name__)
 
 
+@app.route('/health_check')
+def health_check():
+    return jsonify({'code': 200, 'msg': 'The force is strong with this one!'}), 200
+
+
 @app.route('/user/<int:id>')
 def get_user(id):
     result = bl.get_user(id)
