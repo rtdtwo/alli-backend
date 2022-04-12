@@ -15,14 +15,14 @@ def get_user(id):
             'msg' : 'No User found with ID {}'.format(id)
         }
 
-def create_user(data):
+def signup(data):
     f_name = data['fName']
     l_name = data['lName']
     email = data['email']
     sex = data['sex']
     age = data['age']
 
-    result = da.create_user(f_name,l_name,email,sex,age)
+    result = da.signup(f_name,l_name,email,sex,age)
 
     if result[0]:
         return {

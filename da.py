@@ -16,7 +16,7 @@ def get_user_by_email(email):
       return None
 
 
-def create_user(f_name, l_name, email, sex, age):
+def signup(f_name, l_name, email, sex, age):
     existing_user = get_user_by_email(email)
     if existing_user is not None:
         print('User already exists, skipping create')

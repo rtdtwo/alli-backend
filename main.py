@@ -11,11 +11,11 @@ def get_user(id):
 
 
 @app.route('/signup',methods=['POST'])
-def create_user():
+def signup():
     if not request.is_json:
         return jsonify({'code': 400 ,'msg':'No data Provided'}), 400
 
-    result=bl.create_user(request.json)
+    result=bl.signup(request.json)
     return jsonify(result), result['code']
 
 @app.route('/goal', methods = ['POST'])
