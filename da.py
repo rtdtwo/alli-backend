@@ -6,14 +6,15 @@ def get_user(id):
     if len(users) > 0:
         return users[0]
     else:
-      return None
+        return None
+
 
 def get_user_by_email(email):
     users = list(model.User.selectBy(email=email))
     if len(users) > 0:
         return users[0]
     else:
-      return None
+        return None
 
 
 def signup(f_name, l_name, email, sex, age):
@@ -41,19 +42,20 @@ def signup(f_name, l_name, email, sex, age):
         except Exception as e:
             return (False, e)
 
+
 def goal(user_id, event_name, deadline):
     try:
         new_goal = model.Goal(
-            event_name = event_name,
-            deadline = deadline,
-            user_id = user_id
+            event_name=event_name,
+            deadline=deadline,
+            user_id=user_id
         )
         new_goal.set()
         return (True, None)
     except Exception as e:
-            return (False, e)
+        return (False, e)
 
-    
+
 def get_goal(id):
     goal = list(model.Goal.selectBy(id=id))
     if len(goal) > 0:
@@ -61,6 +63,6 @@ def get_goal(id):
     else:
         return None
 
+
 def get_goals_of_user(user_id):
-    return list(model.Goal.selectBy(user_id = user_id))
-    
+    return list(model.Goal.selectBy(user_id=user_id))

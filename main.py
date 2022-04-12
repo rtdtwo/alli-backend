@@ -10,21 +10,22 @@ def get_user(id):
     return jsonify(result), result['code']
 
 
-@app.route('/signup',methods=['POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
     if not request.is_json:
-        return jsonify({'code': 400 ,'msg':'No data Provided'}), 400
-
-    result=bl.signup(request.json)
+        return jsonify({'code': 400, 'msg': 'No data Provided'}), 400
+    result = bl.signup(request.json)
     return jsonify(result), result['code']
 
-@app.route('/goal', methods = ['POST'])
+
+@app.route('/goal', methods=['POST'])
 def goal():
     if not request.is_json:
-        return jsonify({'code': 400 ,'msg':'No data Provided'}), 400
-    
+        return jsonify({'code': 400, 'msg': 'No data Provided'}), 400
+
     result = bl.goal(request.json)
     return jsonify(result), result['code']
+
 
 @app.route('/goal/<string:id>')
 def get_goal(id):
