@@ -10,7 +10,7 @@ def get_user(id):
     return jsonify(result), result['code']
 
 
-@app.route('/user',methods=['POST'])
+@app.route('/signup',methods=['POST'])
 def create_user():
     if not request.is_json:
         return jsonify({'code': 400 ,'msg':'No data Provided'}), 400
