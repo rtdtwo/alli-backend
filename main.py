@@ -1,5 +1,3 @@
-from crypt import methods
-from unittest import result
 from flask import Flask, request, jsonify
 import bl
 
@@ -18,6 +16,24 @@ def create_user():
         return jsonify({'code': 400 ,'msg':'No data Provided'}), 400
 
     result=bl.create_user(request.json)
+    return jsonify(result), result['code']
+
+@app.route('/goal', methods = ['POST'])
+def goal():
+    if not request.is_json:
+        return jsonify({'code': 400 ,'msg':'No data Provided'}), 400
+    
+    result = bl.goal(request.json)
+    return jsonify(result), result['code']
+
+@app.route('/goal/<string:id>')
+def get_goal(id):
+    if id == 'all':
+        user_id = request.args.get('userId')
+        result = bl.get_goals_of_user(int(user_id))
+    else:
+        result = bl.get_goal(int(id))
+
     return jsonify(result), result['code']
 
 

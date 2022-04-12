@@ -40,3 +40,27 @@ def create_user(f_name, l_name, email, sex, age):
                 return (False, 'An Error Occurred')
         except Exception as e:
             return (False, e)
+
+def goal(user_id, event_name, deadline):
+    try:
+        new_goal = model.Goal(
+            event_name = event_name,
+            deadline = deadline,
+            user_id = user_id
+        )
+        new_goal.set()
+        return (True, None)
+    except Exception as e:
+            return (False, e)
+
+    
+def get_goal(id):
+    goal = list(model.Goal.selectBy(id=id))
+    if len(goal) > 0:
+        return goal[0]
+    else:
+        return None
+
+def get_goals_of_user(user_id):
+    return list(model.Goal.selectBy(user_id = user_id))
+    

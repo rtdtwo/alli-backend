@@ -43,3 +43,46 @@ def create_user(data):
             'msg'  :'Error: {}'.format(result[1])
         }
 
+def goal(data):
+    event_name = data['eventName']
+    deadline = data['deadline']
+    user_id = data['userId']
+
+    result = da.goal(user_id, event_name, deadline)
+
+    if result[0]:
+        return {
+            'code' : 201,
+            'msg' : 'Goal Created',
+            'data': {
+                'user_id' : user_id,
+                'event_name': event_name,
+                'deadline' : deadline,
+        }
+    }
+    else:
+        return {
+            'code' : 500,
+            'msg' : 'Error: {}'.format(result[1])
+        }
+
+def get_goal(id):
+    goal = da.get_goal(id)
+    if goal is not None:
+        return {
+            'code' : 200,
+            'data' : goal.to_dict()
+        }
+    else:
+        return {
+            'code' : 404, 
+            'msg' : "No goals have been created"
+        }
+
+def get_goals_of_user(user_id):
+    goals = da.get_goals_of_user(user_id)
+
+    return {
+        'code' : 200,
+        'data' : [goal.to_dict() for goal in goals]
+    }
