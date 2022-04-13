@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import bl
 import waitress
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/health_check')
 def health_check():

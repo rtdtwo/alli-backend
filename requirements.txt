@@ -2,3 +2,4 @@ Flask
 SQLObject
 gunicorn
 waitress
+flask_cors
