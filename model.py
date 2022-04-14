@@ -1,4 +1,5 @@
-import email
+import json
+
 from sqlobject import *
 
 from sqlobject.sqlite import builder
@@ -14,21 +15,20 @@ class User(SQLObject):
     f_name = StringCol()
     l_name = StringCol()
     email = StringCol()
+    social_id = BigIntCol()
     sex = IntCol()
     age = IntCol()
 
     def to_dict(self):
         return {
             'id': self.id,
-            'f_name': self.f_name,
-            'l_name': self.l_name,
+            'fName': self.f_name,
+            'lName': self.l_name,
             'email': self.email,
             'sex': self.sex,
-            'age': self.age
+            'age': self.age,
+            'socialId': self.social_id
         }
-
-
-User.createTable(ifNotExists=True)
 
 
 class Goal(SQLObject):
@@ -49,21 +49,81 @@ class Goal(SQLObject):
             'id': self.id
         }
 
+# SOCIAL MEDIA
 
+class SocialProfile(SQLObject):
+    class sqlmeta:
+        lazyUpdate = True
+
+    _connection = conn
+
+    user_id = BigIntCol()
+    bio = StringCol()
+    nickname = StringCol()
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nickname': self.nickname,
+            'bio': self.bio
+        }
+
+
+class SocialPost(SQLObject):
+    class sqlmeta:
+        lazyUpdate = True
+
+    _connection = conn
+
+    created_by = BigIntCol()
+    created_at = BigIntCol()
+    content = StringCol()
+    anonymous = BoolCol()
+    likes = StringCol()
+    group_id = BigIntCol()
+
+    def to_dict(self, asker_id):
+        likes = json.loads(self.likes)
+        return {
+            'id': self.id,
+            'content': self.content,
+            'createdAt': self.created_at,
+            'anonymous': self.anonymous,
+            'likes': len(likes),
+            'likedByAsker': asker_id in likes
+        }
+
+class SocialGroup(SQLObject):
+    class sqlmeta:
+        lazyUpdate = True
+
+    _connection = conn
+
+    name = StringCol()
+    description = StringCol()
+    created_by = BigIntCol()
+    created_at = BigIntCol()
+    tags = StringCol()
+    members = StringCol()
+
+    def to_dict(self, asker_id):
+        members = json.loads(self.members)
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'createdAt': self.created_at,
+            'tags': json.loads(self.tags),
+            'members': len(members),
+            'askerAMember': asker_id in members
+        }
+
+
+User.createTable(ifNotExists=True)
 Goal.createTable(ifNotExists=True)
+SocialProfile.createTable(ifNotExists=True)
+SocialGroup.createTable(ifNotExists=True)
+SocialPost.createTable(ifNotExists=True)
 
+    
 
-#  {
-#     "fName": "Srikanth Rao",
-#     "lName": "Parcha",
-#     "age": 21,
-#     "sex": 0,
-#     "email": "parcha.srikanthr@ufl.edu"
-# }
-
-
-# {
-#     "userId" : 1,
-#     "eventName" : "marriage",
-#     "deadline" : 1651107708
-# }
