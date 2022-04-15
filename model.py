@@ -1,4 +1,5 @@
 import json
+import da
 
 from sqlobject import *
 
@@ -20,16 +21,21 @@ class User(SQLObject):
     age = IntCol()
 
     def to_dict(self):
-        return {
+        social_profile = da.get_social_profile(self.id)
+        d = {
             'id': self.id,
             'fName': self.f_name,
             'lName': self.l_name,
             'email': self.email,
             'sex': self.sex,
             'age': self.age,
-            'socialId': self.social_id
+            'socialProfile': None
         }
 
+        if social_profile is not None:
+            d['socialProfile'] = social_profile.to_dict()
+
+        return d
 
 class Goal(SQLObject):
     class sqlmeta:

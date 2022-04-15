@@ -102,6 +102,13 @@ def get_social_profile(id):
     else:
         return None
 
+def get_social_profile_by_user_id(user_id):
+    profiles = list(model.SocialProfile.selectBy(user_id=user_id))
+    if len(profiles) > 0:
+        return profiles[0]
+    else:
+        return None
+
 
 def create_social_profile(user_id, nickname, bio):
     try:
