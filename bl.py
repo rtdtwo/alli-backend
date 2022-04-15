@@ -124,12 +124,7 @@ def create_social_profile(data):
         return {
             'code': 201,
             'msg': 'Profile Created',
-            'data': {
-                'userId': user_id,
-                'nickname': nickname,
-                'bio': bio,
-                'socialId': result[1]
-            }
+            'data': da.get_user(user_id).to_dict()
         }
     else:
         return {
