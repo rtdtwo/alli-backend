@@ -1,5 +1,6 @@
 import json
 import da
+from model import Abstinence
 
 
 def get_user(id):
@@ -264,4 +265,33 @@ def get_moods_of_user(user_id):
     return {
         'code': 200,
         'data': [mood.to_dict() for mood in moods]
+    }
+
+def create_abstinence(data):
+    user_id = data['userId'] 
+    addiction = data['addiction']
+
+    result = da.create_abstinence(user_id, addiction)
+
+    if result[0]:
+        return {
+            'code': 201,
+            'msg': 'Addiction created',
+            'data': {
+                'user_id': user_id,
+                'addiction': addiction
+            }
+        }
+    else:
+        return {
+            'code': 500,
+            'msg': 'Error: {}'.format(result[1])
+        }
+
+def get_abstinence_of_user(user_id):
+    abstinences = da.get_abstinence_of_user(user_id)
+
+    return {
+        'code': 200,
+        'data': [abstinence.to_dict() for abstinence in abstinences]
     }

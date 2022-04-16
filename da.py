@@ -250,3 +250,20 @@ def get_mood(user_id, date):
 
 def get_moods_of_user(user_id):
     return list(model.Mood.selectBy(user_id = user_id))
+
+
+def create_abstinence(user_id, addiction ):
+    try:
+        new_abstinenece = model.Abstinence(
+                    user_id = user_id,
+                    addiction = addiction,
+                    start_time = time.time()
+            )
+        new_abstinenece.set()
+        return (True, None)
+    except Exception as e:
+        return (False, e)
+
+def get_abstinence_of_user(user_id):
+    return list(model.Abstinence.selectBy(user_id = user_id))
+

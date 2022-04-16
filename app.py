@@ -128,6 +128,21 @@ def get_mood(user_id):
 
     return jsonify(result), result['code']
 
+@app.route('/abstinence', methods = ['POST'])
+def create_abstinence():
+    if not request.is_json:
+        return jsonify({'code': 400, 'msg': 'No data Provided'}), 400
+    result = bl.create_abstinence(request.json)
+    return jsonify(result), result['code']
+
+
+@app.route('/abstinence/all')
+def get_abstinence():
+    user_id = request.args.get('userId', None)
+    result = bl.get_abstinence_of_user(int(user_id))
+
+    return jsonify(result), result['code']
+
 
 if __name__ == '__main__':
     waitress.serve(app, host='0.0.0.0', port='4000')

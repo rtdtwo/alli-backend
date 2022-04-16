@@ -144,12 +144,35 @@ class Mood(SQLObject):
             'date' : self.date
         }
 
+
+#Abstinenece
+
+
+class Abstinence(SQLObject):
+    class sqlmeta:
+        lazyUpdate = True
+
+    _connection = conn
+
+    user_id = BigIntCol()
+    addiction = StringCol()
+    start_time = BigIntCol()
+
+    def to_dict(self):
+        return{
+            'id' : self.id,
+            'userId': self.user_id,
+            'addiction' : self.addiction,
+            'startTime' : self.start_time
+        }
+
 User.createTable(ifNotExists=True)
 Goal.createTable(ifNotExists=True)
 SocialProfile.createTable(ifNotExists=True)
 SocialGroup.createTable(ifNotExists=True)
 SocialPost.createTable(ifNotExists=True)
 Mood.createTable(ifNotExists=True)
+Abstinence.createTable(ifNotExists=True)
 
     
 
