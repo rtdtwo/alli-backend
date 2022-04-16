@@ -1,3 +1,4 @@
+from datetime import date
 import json
 import model
 import time
@@ -216,5 +217,36 @@ def join_or_leave_group(group_id, social_id):
         return (False, e)
 
 
+def create_mood(user_id, mood, date):
+    try:
+        moods = list(model.Mood.selectBy(user_id = user_id, date = date))
+        if len(moods) > 0:
+            existing_mood = moods[0]
+            existing_mood.mood = mood
+            existing_mood.syncUpdate()
+            return (True, None)
+        else:
+            new_mood = model.Mood(
+                    user_id = user_id,
+                    mood = mood,
+                    date = date
+            )
+            new_mood.set()
+            return True, None
+    except Exception as e:
+        return (False, e)
+
 def get_all_social_groups():
     return list(model.SocialGroup.select())
+
+
+def get_mood(user_id, date):
+    mood = list(model.Mood.selectBy(user_id = user_id, date = date))
+    if len(mood) > 0:
+        return mood[0]
+    else:
+        return None
+
+
+def get_moods_of_user(user_id):
+    return list(model.Mood.selectBy(user_id = user_id))

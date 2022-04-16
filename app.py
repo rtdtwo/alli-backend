@@ -111,7 +111,24 @@ def get_social_groups_of_profile(id):
     result = bl.get_social_groups(id, 'profile')
     return jsonify(result), result['code']
 
+@app.route('/mood', methods = ['POST'])
+def create_mood():
+    if not request.is_json:
+        return jsonify({'code': 400, 'msg': 'No data Provided'}), 400
+    result = bl.create_mood(request.json)
+    return jsonify(result), result['code']
+    
+@app.route('/mood/<int:user_id>')
+def get_mood(user_id):
+    date = request.args.get('date', 'all')
+    if date == 'all':
+        result = bl.get_moods_of_user(user_id)
+    else:
+        result = bl.get_mood(user_id, date)
+
+    return jsonify(result), result['code']
+
 
 if __name__ == '__main__':
-    # waitress.serve(app, host='0.0.0.0', port='4000')
-    app.run(host='0.0.0.0', port='4000')
+    waitress.serve(app, host='0.0.0.0', port='4000')
+    # app.run(host='0.0.0.0', port='4000')

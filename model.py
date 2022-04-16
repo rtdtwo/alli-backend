@@ -124,12 +124,32 @@ class SocialGroup(SQLObject):
             'askerAMember': asker_id in members
         }
 
+#MOOD
+
+class Mood(SQLObject):
+    class sqlmeta:
+        lazyUpdate = True
+
+    _connection = conn
+
+    user_id = BigIntCol()
+    mood = StringCol()
+    date = StringCol()
+
+    def to_dict(self):
+        return{
+            'id' : self.id,
+            'userId': self.user_id,
+            'mood' : self.mood,
+            'date' : self.date
+        }
 
 User.createTable(ifNotExists=True)
 Goal.createTable(ifNotExists=True)
 SocialProfile.createTable(ifNotExists=True)
 SocialGroup.createTable(ifNotExists=True)
 SocialPost.createTable(ifNotExists=True)
+Mood.createTable(ifNotExists=True)
 
     
 

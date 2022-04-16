@@ -219,3 +219,49 @@ def get_social_groups(social_id, type):
         result = [group.to_dict(social_id) for group in user_groups]
 
     return {'code': 200, 'data': result}
+
+
+def create_mood(data):
+    user_id = data['userId'] 
+    mood = data['mood']
+    date = data['date']
+
+    result = da.create_mood(user_id, mood, date)
+
+    if result[0]:
+        return {
+            'code': 201,
+            'msg': 'Mood created',
+            'data': {
+                'user_id': user_id,
+                'mood': mood,
+                'date': date,
+            }
+        }
+    else:
+        return {
+            'code': 500,
+            'msg': 'Error: {}'.format(result[1])
+        }
+    
+def get_mood(user_id, date):
+    mood = da.get_mood(user_id, date)
+    if mood is not None:
+        return {
+            'code': 200,
+            'data': mood.to_dict()
+        }
+    else:
+        return {
+            'code': 404,
+            'msg': 'No mood with ID {} exists'.format(user_id, date)
+        }
+
+
+def get_moods_of_user(user_id):
+    moods = da.get_moods_of_user(user_id)
+
+    return {
+        'code': 200,
+        'data': [mood.to_dict() for mood in moods]
+    }
