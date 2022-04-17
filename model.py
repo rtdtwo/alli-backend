@@ -95,6 +95,7 @@ class SocialPost(SQLObject):
             'content': self.content,
             'createdAt': self.created_at,
             'anonymous': self.anonymous,
+            'createdBy': da.get_social_profile(self.created_by).to_dict(),
             'likes': len(likes),
             'likedByAsker': asker_id in likes
         }
