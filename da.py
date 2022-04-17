@@ -154,14 +154,14 @@ def get_post_by_id(id):
         return None
 
 
-def create_social_post(profile_id, content, anonymous, group_id):
+def create_social_post(created_by, content, anonymous, group_id):
     try:
         new_post = model.SocialPost(
-            created_by=profile_id,
+            created_by=created_by,
             created_at=time.time(),
             content=content,
             anonymous=anonymous,
-            likes=json.dumps([profile_id]),
+            likes=json.dumps([created_by]),
             group_id=group_id
         )
 

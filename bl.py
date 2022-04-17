@@ -144,7 +144,7 @@ def get_posts_of_group(group_id, type, social_id):
 
 
 def create_social_post(data):
-    created_by = data['userId']
+    created_by = data['socialId']
     content = data['content']
     anonymous = data['anonymous']
     group_id = data['groupId']
