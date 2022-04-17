@@ -190,7 +190,7 @@ def join_or_leave_group(group_id, social_id):
             'code': 400,
             'msg': 'No social ID provided'
         }
-        
+
     result = da.join_or_leave_group(group_id, social_id)
     if result[0]:
         return {
@@ -223,7 +223,7 @@ def get_social_groups(social_id, type):
 
 
 def create_mood(data):
-    user_id = data['userId'] 
+    user_id = data['userId']
     mood = data['mood']
     date = data['date']
 
@@ -244,7 +244,8 @@ def create_mood(data):
             'code': 500,
             'msg': 'Error: {}'.format(result[1])
         }
-    
+
+
 def get_mood(user_id, date):
     mood = da.get_mood(user_id, date)
     if mood is not None:
@@ -267,8 +268,9 @@ def get_moods_of_user(user_id):
         'data': [mood.to_dict() for mood in moods]
     }
 
+
 def create_abstinence(data):
-    user_id = data['userId'] 
+    user_id = data['userId']
     addiction = data['addiction']
 
     result = da.create_abstinence(user_id, addiction)
@@ -288,6 +290,7 @@ def create_abstinence(data):
             'msg': 'Error: {}'.format(result[1])
         }
 
+
 def get_abstinence_of_user(user_id):
     abstinences = da.get_abstinence_of_user(user_id)
 
@@ -295,3 +298,17 @@ def get_abstinence_of_user(user_id):
         'code': 200,
         'data': [abstinence.to_dict() for abstinence in abstinences]
     }
+
+
+def reset_abstinence(id):
+    result = da.reset_abstinence(id)
+    if result[0]:
+        return {
+            'code': 200,
+            'msg': 'Abstinence reset successfully'
+        }
+    else:
+        return {
+            'code': 500,
+            'msg': 'Error: {}'.format(result[1])
+        }

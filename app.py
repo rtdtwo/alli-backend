@@ -111,13 +111,15 @@ def get_social_groups_of_profile(id):
     result = bl.get_social_groups(id, 'profile')
     return jsonify(result), result['code']
 
-@app.route('/mood', methods = ['POST'])
+
+@app.route('/mood', methods=['POST'])
 def create_mood():
     if not request.is_json:
         return jsonify({'code': 400, 'msg': 'No data Provided'}), 400
     result = bl.create_mood(request.json)
     return jsonify(result), result['code']
-    
+
+
 @app.route('/mood/<int:user_id>')
 def get_mood(user_id):
     date = request.args.get('date', 'all')
@@ -128,7 +130,8 @@ def get_mood(user_id):
 
     return jsonify(result), result['code']
 
-@app.route('/abstinence', methods = ['POST'])
+
+@app.route('/abstinence', methods=['POST'])
 def create_abstinence():
     if not request.is_json:
         return jsonify({'code': 400, 'msg': 'No data Provided'}), 400
@@ -141,6 +144,12 @@ def get_abstinence():
     user_id = request.args.get('userId', None)
     result = bl.get_abstinence_of_user(int(user_id))
 
+    return jsonify(result), result['code']
+
+
+@app.route('/abstinence/<int:id>/reset', methods=['PUT'])
+def reset_abstinence():
+    result = bl.reset_abstinence(id)
     return jsonify(result), result['code']
 
 

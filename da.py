@@ -1,3 +1,4 @@
+from calendar import c
 from datetime import date
 import json
 import model
@@ -102,6 +103,7 @@ def get_social_profile(id):
         return profiles[0]
     else:
         return None
+
 
 def get_social_profile_by_user_id(user_id):
     profiles = list(model.SocialProfile.selectBy(user_id=user_id))
@@ -219,7 +221,7 @@ def join_or_leave_group(group_id, social_id):
 
 def create_mood(user_id, mood, date):
     try:
-        moods = list(model.Mood.selectBy(user_id = user_id, date = date))
+        moods = list(model.Mood.selectBy(user_id=user_id, date=date))
         if len(moods) > 0:
             existing_mood = moods[0]
             existing_mood.mood = mood
@@ -227,21 +229,22 @@ def create_mood(user_id, mood, date):
             return (True, None)
         else:
             new_mood = model.Mood(
-                    user_id = user_id,
-                    mood = mood,
-                    date = date
+                user_id=user_id,
+                mood=mood,
+                date=date
             )
             new_mood.set()
             return True, None
     except Exception as e:
         return (False, e)
 
+
 def get_all_social_groups():
     return list(model.SocialGroup.select())
 
 
 def get_mood(user_id, date):
-    mood = list(model.Mood.selectBy(user_id = user_id, date = date))
+    mood = list(model.Mood.selectBy(user_id=user_id, date=date))
     if len(mood) > 0:
         return mood[0]
     else:
@@ -249,21 +252,35 @@ def get_mood(user_id, date):
 
 
 def get_moods_of_user(user_id):
-    return list(model.Mood.selectBy(user_id = user_id))
+    return list(model.Mood.selectBy(user_id=user_id))
 
 
-def create_abstinence(user_id, addiction ):
+def create_abstinence(user_id, addiction):
     try:
         new_abstinenece = model.Abstinence(
-                    user_id = user_id,
-                    addiction = addiction,
-                    start_time = time.time()
-            )
+            user_id=user_id,
+            addiction=addiction,
+            start_time=time.time()
+        )
         new_abstinenece.set()
         return (True, None)
     except Exception as e:
         return (False, e)
 
-def get_abstinence_of_user(user_id):
-    return list(model.Abstinence.selectBy(user_id = user_id))
 
+def get_abstinence_of_user(user_id):
+    return list(model.Abstinence.selectBy(user_id=user_id))
+
+
+def reset_abstinence(id):
+    abstinence = list(model.Abstinence.selectBy(id=id))
+    try:
+        if len(abstinence) > 0:
+            abstinence_to_reset = abstinence[0]
+            abstinence_to_reset.start_time = time.time()
+            abstinence_to_reset.syncUpdate()
+            return (True, None)
+        else:
+            return (False, 'No abstinence with this ID')
+    except Exception as e:
+        return (False, e)
