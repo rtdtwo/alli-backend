@@ -21,7 +21,7 @@ class User(SQLObject):
     age = IntCol()
 
     def to_dict(self):
-        social_profile = da.get_social_profile(self.id)
+        social_profile = da.get_social_profile(self.social_id)
         d = {
             'id': self.id,
             'fName': self.f_name,

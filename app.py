@@ -154,5 +154,5 @@ def reset_abstinence(id):
 
 
 if __name__ == '__main__':
-    # waitress.serve(app, host='0.0.0.0', port='4000')
-    app.run(host='0.0.0.0', port='4000')
+    waitress.serve(app, host='0.0.0.0', port='4000')
+    # app.run(host='0.0.0.0', port='4000')
