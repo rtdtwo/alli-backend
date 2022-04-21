@@ -1,5 +1,11 @@
 # dhp2022-backend
-A project developed to fulfil course requirements of CIS6930 Digital Health.
+A project developed to fulfil course requirements of CIS6930 Digital Health, Spring 2022.
+
+# Personnel
+- Rishabh Tatiraju (Frontend/Backend)
+- Ravi Teja Lanka (Backend)
+- Srikanth Rao Parcha (Backend)
+- Lisa Touchton (Frontend)
 
 # How to run?
 Note: Project requires Python 3, Python 3.9+ recommended.
