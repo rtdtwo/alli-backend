@@ -1,7 +1,7 @@
 # dhp2022-backend
 A project developed to fulfil course requirements of CIS6930 Digital Health, Spring 2022.
 
-This is the backend repository. The frontend, which is a mobile app, can be found !(here)[https://github.com/DHP2022/dhp2022-app].
+This is the backend repository. The frontend, which is a mobile app, can be found ![here](https://github.com/DHP2022/dhp2022-app).
 
 # Personnel
 - Rishabh Tatiraju (Frontend/Backend)
