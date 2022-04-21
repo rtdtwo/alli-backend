@@ -2,6 +2,7 @@
 A project developed to fulfil course requirements of CIS6930 Digital Health.
 
 # How to run?
+Note: Project requires Python 3, Python 3.9+ recommended.
 
 ## Create a virtual environment (optional but recommended)
 ```
