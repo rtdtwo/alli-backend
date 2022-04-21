@@ -21,3 +21,7 @@ pip install -r requirements.txt
 ```
 python app.py
 ```
+
+## API Doc
+See Postman Workspace:
+https://www.postman.com/martian-escape-233806/workspace/dhp2022
