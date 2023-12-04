@@ -3,6 +3,8 @@ A project developed to fulfil course requirements of CIS6930 Digital Health, Spr
 
 This is the backend repository. The frontend, which is a mobile app, can be found ![here](https://github.com/rtdtwo/dhp2022-app).
 
+https://github.com/rtdtwo/alli-backend/assets/24786834/56b7870d-cfe9-4e71-8e41-a5d9f3580c85
+
 # Personnel
 - Rishabh Tatiraju (Frontend/Backend)
 - Ravi Teja Lanka (Backend)
